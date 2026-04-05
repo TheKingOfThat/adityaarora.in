@@ -47,6 +47,11 @@
       overflow-x: hidden
     }
 
+    .no-scroll {
+      overflow: hidden;
+      height: 100vh
+    }
+
     body::before {
       content: '';
       position: fixed;
@@ -76,7 +81,7 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
+      z-index: 9999;
       padding: 22px 60px;
       display: flex;
       align-items: center;
@@ -1175,6 +1180,8 @@
       .links {
         position: fixed;
         inset: 0;
+        height: 100vh;
+        width: 100vw;
         background: var(--bg);
         flex-direction: column;
         align-items: center;
@@ -1183,13 +1190,13 @@
         opacity: 0;
         visibility: hidden;
         transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-        z-index: 999
+        z-index: 10000
       }
 
       .nav-active .links {
         opacity: 1;
         visibility: visible;
-        background: rgba(7, 0, 26, 0.98);
+        background: #07001A;
         backdrop-filter: blur(15px)
       }
 
@@ -1693,10 +1700,12 @@
 
     toggle.addEventListener('click', () => {
       body.classList.toggle('nav-active');
+      body.classList.toggle('no-scroll');
     });
 
     links.forEach(l => l.addEventListener('click', () => {
       body.classList.remove('nav-active');
+      body.classList.remove('no-scroll');
     }));
 
     // NAV SCROLL SCENE
