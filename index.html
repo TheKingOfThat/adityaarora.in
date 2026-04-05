@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya Arora | Video Editor — adityaarora.in</title>
+  <meta name="description"
+    content="Aditya Arora — video editor behind TheKingOfThat. Cinematic reels, edits & short-form content for Instagram & YouTube.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --muted: #9B89C4;
+      --accentH: #F0CC55;
+      --dim: #5A4A7A;
+      --text: #F0EAFF;
+      --borderH: rgba(212, 175, 55, 0.4);
+      --accent: #D4AF37;
+      --r: 14px;
+      --glow: rgba(212, 175, 55, 0.28);
+      --purple: #8B5CF6;
+      --border: rgba(212, 175, 55, 0.15);
+      --nav: rgba(7, 0, 26, 0.88);
+      --card: rgba(109, 40, 217, 0.07);
+      --bg: #07001A;
+      --bg2: #0F0328;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0
+    }
+
+    ::-webkit-scrollbar {
+      width: 3px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg)
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--purple);
+      border-radius: 2px
+    }
+
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 22px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all .4s
+    }
+
+    nav.s {
+      padding: 14px 60px;
+      background: var(--nav);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -.5px
+    }
+
+    .logo span {
+      color: var(--accent)
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none
+    }
+
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: color .2s
+    }
+
+    .links a:hover {
+      color: var(--text)
+    }
+
+    .cta-nav {
+      padding: 9px 22px;
+      border: 1px solid var(--accent);
+      color: var(--accent) !important;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: all .2s !important
+    }
+
+    .cta-nav:hover {
+      background: var(--accent) !important;
+      color: var(--bg) !important;
+      box-shadow: 0 0 20px var(--glow)
+    }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 130px 60px 90px;
+      overflow: hidden
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(100px)
+    }
+
+    .o1 {
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(201, 149, 26, .14) 0%, transparent 70%);
+      top: -120px;
+      right: -80px
+    }
+
+    .o2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201, 149, 26, .08) 0%, transparent 70%);
+      bottom: -60px;
+      left: -60px
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      gap: 40px
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 700px;
+      animation: up 1s cubic-bezier(0, .7, .1, 1) forwards;
+      opacity: 0;
+      transform: translateY(40px)
+    }
+
+    .hero-image {
+      flex: 0 0 350px;
+      width: 350px;
+      aspect-ratio: 4/5;
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      position: relative;
+      animation: up 1.2s cubic-bezier(0, .7, .1, 1) forwards;
+      opacity: 0;
+      transform: translateY(40px)
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--accent)
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -3px;
+      margin-bottom: 14px
+    }
+
+    h1 .out {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--accent)
+    }
+
+    .handle {
+      font-size: 1.3rem;
+      color: #C084FC;
+      margin-bottom: 22px
+    }
+
+    .handle a {
+      color: var(--purple);
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .handle a:hover {
+      color: var(--accent)
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 540px;
+      margin-bottom: 44px;
+      font-weight: 300
+    }
+
+    .ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap
+    }
+
+    .btn-a {
+      padding: 14px 30px;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: inherit;
+      font-size: .92rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .25s;
+      letter-spacing: .02em
+    }
+
+    .btn-a:hover {
+      background: var(--accentH);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px var(--glow)
+    }
+
+    .btn-b {
+      padding: 13px 30px;
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      font-size: .92rem;
+      font-weight: 600;
+      border: 1px solid rgba(240, 234, 255, .18);
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .25s
+    }
+
+    .btn-b:hover {
+      border-color: rgba(240, 234, 255, .4);
+      background: rgba(240, 234, 255, .04);
+      transform: translateY(-2px)
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 38px;
+      left: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--dim);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase
+    }
+
+    .scroll-line {
+      width: 38px;
+      height: 1px;
+      background: var(--dim);
+      animation: spulse 2s ease-in-out infinite
+    }
+
+    @keyframes spulse {
+
+      0%,
+      100% {
+        opacity: .4
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    /* MARQUEE */
+    .mq {
+      padding: 26px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      z-index: 1
+    }
+
+    .mq-track {
+      display: flex;
+      animation: mroll 28s linear infinite;
+      white-space: nowrap
+    }
+
+    .mq-track:hover {
+      animation-play-state: paused
+    }
+
+    .mi {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      padding: 0 36px;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted)
+    }
+
+    .md {
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    @keyframes mroll {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+      z-index: 1
+    }
+
+    .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 60px
+    }
+
+    .slabel {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px
+    }
+
+    .stitle {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      color: var(--text);
+      line-height: 1.15
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 80px;
+      align-items: center
+    }
+
+    .about-right p {
+      color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.82;
+      margin-bottom: 20px;
+      font-weight: 300
+    }
+
+    .about-right p strong {
+      color: var(--text);
+      font-weight: 600
+    }
+
+    .chips {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-top: 28px
+    }
+
+    .chip {
+      padding: 5px 13px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: .76rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all .2s
+    }
+
+    .chip:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    /* SERVICES */
+    #services {
+      background: var(--bg2)
+    }
+
+    .srv-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px
+    }
+
+    .srv-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px
+    }
+
+    .sc {
+      padding: 34px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      transition: all .3s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .sc::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s
+    }
+
+    .sc:hover::before {
+      transform: scaleX(1)
+    }
+
+    .sc:hover {
+      border-color: var(--borderH);
+      background: rgba(201, 149, 26, .09);
+      transform: translateY(-4px)
+    }
+
+    .sc-icon {
+      font-size: 1.9rem;
+      margin-bottom: 18px;
+      display: block
+    }
+
+    .sc-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -.4px
+    }
+
+    .sc-desc {
+      color: var(--muted);
+      font-size: .875rem;
+      line-height: 1.72;
+      font-weight: 300
+    }
+
+    .sc-num {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: rgba(212, 175, 55, .05);
+      letter-spacing: -2px
+    }
+
+    /* PORTFOLIO */
+    .port-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 44px
+    }
+
+    .port-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap .2s
+    }
+
+    .port-link:hover {
+      gap: 10px
+    }
+
+    .port-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px
+    }
+
+    .vc {
+      border-radius: var(--r);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--card);
+      transition: all .3s
+    }
+
+    .vc:hover {
+      border-color: var(--borderH);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, .45)
+    }
+
+    .vw {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      display: block;
+      background: #000
+    }
+
+    .vw img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+      opacity: 0.85
+    }
+
+    .vc:hover .vw img {
+      transform: scale(1.04);
+      opacity: 0.5
+    }
+
+    .play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 54px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 1.2rem;
+      backdrop-filter: blur(6px);
+      transition: all .3s;
+      z-index: 2;
+      padding-left: 4px
+    }
+
+    .vc:hover .play-btn {
+      background: var(--accent);
+      color: var(--bg);
+      transform: translate(-50%, -50%) scale(1.1);
+      border-color: var(--accent)
+    }
+
+    .vm {
+      padding: 14px 18px
+    }
+
+    .vt {
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px
+    }
+
+    .vs {
+      font-size: .78rem;
+      color: var(--muted)
+    }
+
+    /* BLOG */
+    #blog {
+      background: var(--bg)
+    }
+
+    .blog-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 44px
+    }
+
+    .blog-list {
+      border-top: 1px solid var(--border);
+      margin-bottom: 48px
+    }
+
+    .blog-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: all .25s
+    }
+
+    .blog-item:hover {
+      padding-left: 8px
+    }
+
+    .bi-main {
+      flex: 1;
+      min-width: 0
+    }
+
+    .bi-date {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 8px
+    }
+
+    .bi-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+      letter-spacing: -.4px;
+      margin-bottom: 8px;
+      transition: color .25s
+    }
+
+    .blog-item:hover .bi-title {
+      color: var(--accent)
+    }
+
+    .bi-excerpt {
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden
+    }
+
+    .bi-arrow {
+      font-size: 1.2rem;
+      color: var(--dim);
+      flex-shrink: 0;
+      margin-top: 4px;
+      transition: all .25s;
+      transform: translateX(0)
+    }
+
+    .blog-item:hover .bi-arrow {
+      color: var(--accent);
+      transform: translateX(4px)
+    }
+
+    .blog-empty {
+      padding: 48px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 300;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .blog-empty a {
+      color: var(--accent);
+      text-decoration: none
+    }
+
+    /* Substack embed wrapper */
+    .substack-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      position: relative
+    }
+
+    .substack-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 180px;
+      border: none;
+      color-scheme: light
+    }
+
+    .substack-sub {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .substack-sub-text p {
+      font-size: .875rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-top: 4px
+    }
+
+    .substack-sub-text strong {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1rem
+    }
+
+    @media(max-width:768px) {
+      .blog-item {
+        flex-direction: column;
+        gap: 10px
+      }
+
+      .bi-arrow {
+        display: none
+      }
+
+      .substack-sub {
+        flex-direction: column;
+        text-align: center
+      }
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--bg2)
+    }
+
+    #contact .inner {
+      text-align: center;
+      padding: 120px 60px
+    }
+
+    .ct-title {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -2.5px;
+      line-height: 1.1;
+      margin-bottom: 18px
+    }
+
+    .ct-title .out {
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--accent)
+    }
+
+    .ct-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 460px;
+      margin: 0 auto 50px;
+      font-weight: 300;
+      line-height: 1.75
+    }
+
+    .cl-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap
+    }
+
+    .cl {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 26px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+      transition: all .25s
+    }
+
+    .cl:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(212, 175, 55, .06);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, .14)
+    }
+
+    .cl svg {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0
+    }
+
+    .hero-socials {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      align-items: center;
+      animation: up 1s cubic-bezier(0, .7, .1, 1) .2s forwards;
+      opacity: 0
+    }
+
+    .hs-link {
+      color: var(--muted);
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .hs-link:hover {
+      color: var(--accent);
+      transform: translateY(-2px)
+    }
+
+    .hs-link svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor
+    }
+
+    .hs-link.mail svg,
+    .hs-link.phone svg {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2
+    }
+
+    /* SOCIALS SECTION */
+    #socials {
+      background: var(--bg)
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 26px 60px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1
+    }
+
+    footer p {
+      color: var(--dim);
+      font-size: .78rem
+    }
+
+    .flogo {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text)
+    }
+
+    .flogo span {
+      color: var(--accent)
+    }
+
+    .back-top {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .875rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s
+    }
+
+    .back-top:hover {
+      color: var(--accent)
+    }
+
+    .back-top svg {
+      width: 16px;
+      height: 16px
+    }
+
+    /* SETUP */
+    #setup {
+      background: var(--bg2)
+    }
+
+    .setup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 40px
+    }
+
+    .setup-sub {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 24px;
+      letter-spacing: -.5px
+    }
+
+    .setup-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .setup-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      transition: all .3s
+    }
+
+    .setup-card:hover {
+      border-color: var(--borderH);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .15)
+    }
+
+    .sw-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.4rem;
+      flex-shrink: 0
+    }
+
+    .sw-icon.pr {
+      background: transparent;
+      border: none
+    }
+
+    .sw-icon.ae {
+      background: transparent;
+      border: none
+    }
+
+    .sw-icon.dr {
+      background: transparent;
+      border: none
+    }
+
+    .sw-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor
+    }
+
+    .sw-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text)
+    }
+
+    .hw-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed var(--borderH);
+      flex-shrink: 0
+    }
+
+    /* REVEAL */
+    @keyframes up {
+      0% {
+        opacity: 0;
+        transform: translateY(40px)
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .d1 {
+      transition-delay: .1s
+    }
+
+    .d2 {
+      transition-delay: .2s
+    }
+
+    .d3 {
+      transition-delay: .3s
+    }
+
+    .d4 {
+      transition-delay: .4s
+    }
+
+    .d5 {
+      transition-delay: .5s
+    }
+
+    .d6 {
+      transition-delay: .6s
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+
+      nav,
+      nav.s {
+        padding: 16px 24px
+      }
+
+      .links {
+        display: none
+      }
+
+      #hero {
+        padding: 100px 24px 60px;
+        height: auto;
+        min-height: auto
+      }
+
+      .hero-inner {
+        flex-direction: column-reverse;
+        gap: 40px;
+        align-items: flex-start
+      }
+
+      .hero-image {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto
+      }
+
+      .inner {
+        padding: 60px 24px
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 36px
+      }
+
+      .srv-grid,
+      .port-grid,
+      .setup-grid {
+        grid-template-columns: 1fr
+      }
+
+      .cl-wrap {
+        flex-direction: column;
+        align-items: center
+      }
+
+      footer {
+        padding: 20px 24px;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center
+      }
+
+      .scroll-hint {
+        left: 24px
+      }
+
+      h1 {
+        letter-spacing: -2px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="nav">
+    <a href="#" class="logo">AA<span>.</span></a>
+    <ul class="links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Skills</a></li>
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#stats">Socials</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="#contact" class="cta-nav">Contact Me</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow">Video Editor · Content Creator</p>
+        <h1>Aditya <span class="out">Arora</span></h1>
+        <p class="handle">@thekingofthat.aa</p>
+        <p class="tagline">Creator.<br>Short-form editor and hobby videographer.</p>
+        <div class="ctas">
+          <a href="#portfolio" class="btn-a">View My Work →</a>
+          <a href="#contact" class="btn-b">Get In Touch</a>
+        </div>
+        <div class="hero-socials">
+          <a href="#stats" class="hs-link" title="Instagram">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+          <a href="#stats" class="hs-link" title="YouTube">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg>
+          </a>
+          <a href="#contact" class="hs-link" title="WhatsApp">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.558 0 11.893-5.335 11.896-11.893a11.83 11.83 0 00-3.481-8.417z" />
+            </svg>
+          </a>
+          <a href="#contact" class="hs-link phone" title="Call">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+          </a>
+          <a href="#contact" class="hs-link mail" title="Email">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="profile.jpg" alt="Aditya Arora">
+      </div>
+    </div>
+    <div class="scroll-hint"><span class="scroll-line"></span>Scroll</div>
+  </section>
+
+  <div class="mq">
+    <div class="mq-track">
+      <span class="mi"><span class="md"></span>Adobe Premiere Pro</span>
+      <span class="mi"><span class="md"></span>After Effects</span>
+      <span class="mi"><span class="md"></span>Color Grading</span>
+      <span class="mi"><span class="md"></span>Motion Graphics</span>
+      <span class="mi"><span class="md"></span>Instagram Reels</span>
+      <span class="mi"><span class="md"></span>YouTube Edits</span>
+      <span class="mi"><span class="md"></span>Cinematic Transitions</span>
+      <span class="mi"><span class="md"></span>4K Production</span>
+      <span class="mi"><span class="md"></span>VFX &amp; Compositing</span>
+      <span class="mi"><span class="md"></span>Videography</span>
+      <span class="mi"><span class="md"></span>Photography</span>
+      <span class="mi"><span class="md"></span>Short Form Content</span>
+      <span class="mi"><span class="md"></span>Adobe Premiere Pro</span>
+      <span class="mi"><span class="md"></span>After Effects</span>
+      <span class="mi"><span class="md"></span>Color Grading</span>
+      <span class="mi"><span class="md"></span>Motion Graphics</span>
+      <span class="mi"><span class="md"></span>Instagram Reels</span>
+      <span class="mi"><span class="md"></span>YouTube Edits</span>
+      <span class="mi"><span class="md"></span>Cinematic Transitions</span>
+      <span class="mi"><span class="md"></span>4K Production</span>
+      <span class="mi"><span class="md"></span>VFX &amp; Compositing</span>
+      <span class="mi"><span class="md"></span>Videography</span>
+      <span class="mi"><span class="md"></span>Photography</span>
+      <span class="mi"><span class="md"></span>Short Form Content</span>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="inner about-grid">
+      <div class="reveal">
+        <p class="slabel">Who I Am</p>
+        <h2 class="stitle">Editor by obsession,<br><em>not just profession.</em></h2>
+      </div>
+      <div class="reveal d2">
+        <p>Hey, I'm <strong>Aditya Arora</strong> known online as <strong>TheKingOfThat</strong>. I make edits that are
+          different: clean cuts, perfect timing, and a cinematic eye that makes every frame count.
+        </p>
+        <p>I use <strong>Adobe Premiere Pro</strong> and <strong>After Effects</strong>, to make short videos for
+          Instagram Reels and YouTube. I mainly edit as a hobby, but I hope to turn it into something more.</p>
+        <div class="chips">
+          <span class="chip">Premiere Pro</span>
+          <span class="chip">After Effects</span>
+          <span class="chip">Color Grading</span>
+          <span class="chip">Motion Design</span>
+          <span class="chip">4K Editing</span>
+          <span class="chip">VFX</span>
+          <span class="chip">Reels &amp; Shorts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="inner">
+      <div class="srv-head reveal">
+        <div>
+          <p class="slabel">What I Do</p>
+          <h2 class="stitle">Skills</h2>
+        </div>
+      </div>
+      <div class="srv-grid">
+        <div class="sc reveal d1">
+          <span class="sc-icon">🎬</span>
+          <h3 class="sc-title">Cinematic Short-form Edits</h3>
+          <p class="sc-desc">Fan edits made with quick pacing, accurate colour grading, and
+            precise timing.</p>
+          <span class="sc-num">01</span>
+        </div>
+        <div class="sc reveal d2">
+          <span class="sc-icon">📱</span>
+          <h3 class="sc-title">Reels &amp; Short Form</h3>
+          <p class="sc-desc">Scroll-stopping edits built for Instagram Reels and YouTube. Perfect
+            pacing, music sync, and hooks that hold attention.</p>
+          <span class="sc-num">02</span>
+        </div>
+        <div class="sc reveal d3">
+          <span class="sc-icon">🎨</span>
+          <h3 class="sc-title">Colour Grading</h3>
+          <p class="sc-desc">Mood-matched colour work that transforms raw footage. From cinematic film looks to clean
+            social-media-ready tones.</p>
+          <span class="sc-num">03</span>
+        </div>
+        <div class="sc reveal d4">
+          <span class="sc-icon">✨</span>
+          <h3 class="sc-title">Motion &amp; VFX</h3>
+          <p class="sc-desc">Smooth transitions, text animations, and compositing using After Effects. Clean motion
+            design that elevates your content without overwhelming it.</p>
+          <span class="sc-num">04</span>
+        </div>
+        <div class="sc reveal d5">
+          <span class="sc-icon">🎥</span>
+          <h3 class="sc-title">Videography</h3>
+          <p class="sc-desc">High-quality filming for events, commercials, and cinematic shoots. Professional framing,
+            lighting, and movement that brings stories to life.</p>
+          <span class="sc-num">05</span>
+        </div>
+        <div class="sc reveal d6">
+          <span class="sc-icon">📸</span>
+          <h3 class="sc-title">Photography</h3>
+          <p class="sc-desc">Professional stills for branding, portraiture, and events. Capturing the perfect moment
+            with advanced post-processing for a polished look.</p>
+          <span class="sc-num">06</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="inner">
+      <div class="port-head reveal">
+        <div>
+          <p class="slabel">My Work</p>
+          <h2 class="stitle">Recent Edits</h2>
+        </div>
+        <a href="https://www.youtube.com/@TheKingOfThat" target="_blank" class="port-link">All Videos →</a>
+      </div>
+      <div class="port-grid">
+        <div class="vc reveal d1">
+          <a href="https://www.youtube.com/watch?v=OCeuRESrt7I" target="_blank" class="vw">
+            <img src="https://img.youtube.com/vi/OCeuRESrt7I/hqdefault.jpg" alt="Spider-Man Edit">
+            <div class="play-btn">▶</div>
+          </a>
+          <div class="vm">
+            <p class="vt">Spider-Man: Brand New Day Edit</p>
+            <p class="vs">Family Ties</p>
+          </div>
+        </div>
+        <div class="vc reveal d2">
+          <a href="https://www.youtube.com/watch?v=B7h9743NFLU" target="_blank" class="vw">
+            <img src="https://img.youtube.com/vi/B7h9743NFLU/maxresdefault.jpg" alt="Chaar Diwaari Edit"
+              onerror="this.src='https://img.youtube.com/vi/B7h9743NFLU/hqdefault.jpg'">
+            <div class="play-btn">▶</div>
+          </a>
+          <div class="vm">
+            <p class="vt">Chaar Diwaari Edit</p>
+            <p class="vs">Farebi</p>
+          </div>
+        </div>
+        <div class="vc reveal d3">
+          <a href="https://www.youtube.com/watch?v=FkKs6HKAPIo" target="_blank" class="vw">
+            <img src="https://img.youtube.com/vi/FkKs6HKAPIo/maxresdefault.jpg" alt="PK Movie Edit"
+              onerror="this.src='https://img.youtube.com/vi/FkKs6HKAPIo/hqdefault.jpg'">
+            <div class="play-btn">▶</div>
+          </a>
+          <div class="vm">
+            <p class="vt">PK (2014) Movie Edit</p>
+            <p class="vs">Banda Kaam Ka</p>
+          </div>
+        </div>
+        <div class="vc reveal d4">
+          <a href="https://www.youtube.com/watch?v=wy0DzEhgUBc" target="_blank" class="vw">
+            <img src="https://img.youtube.com/vi/wy0DzEhgUBc/maxresdefault.jpg" alt="F1 Edit"
+              onerror="this.src='https://img.youtube.com/vi/wy0DzEhgUBc/hqdefault.jpg'">
+            <div class="play-btn">▶</div>
+          </a>
+          <div class="vm">
+            <p class="vt">4K Lewis Hamilton F1 Edit</p>
+            <p class="vs">UDon'tUnderstand</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stats">
+    <div class="inner">
+      <div class="reveal">
+        <p class="slabel">By The Numbers</p>
+        <h2 class="stitle">My Socials</h2>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-col reveal d1">
+          <div class="setup-list">
+            <a href="https://www.instagram.com/thekingofthat.aa" target="_blank" class="setup-card"
+              style="text-decoration:none;">
+              <div class="hw-icon" style="border:none;background:transparent;">
+                <img src="ig.png" alt="Instagram" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <div>
+                <span class="sw-text" style="display:block;">10,000+ Views, 250+ Followers</span>
+                <span style="font-size:0.8rem;color:var(--muted);display:block;margin-top:2px;">On Instagram</span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="setup-col reveal d2">
+          <div class="setup-list">
+            <a href="https://www.youtube.com/@TheKingOfThat" target="_blank" class="setup-card"
+              style="text-decoration:none;">
+              <div class="hw-icon" style="border:none;background:transparent;">
+                <img src="yt.png" alt="YouTube" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <div>
+                <span class="sw-text" style="display:block;">400+ Views, 20+ Subscribers</span>
+                <span style="font-size:0.8rem;color:var(--muted);display:block;margin-top:2px;">On Youtube</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <div class="inner">
+      <div class="blog-head reveal">
+        <div>
+          <p class="slabel">Writing</p>
+          <h2 class="stitle">From the Blog</h2>
+        </div>
+        <a href="https://thekingofthat.substack.com" target="_blank" class="port-link">Read All on Substack →</a>
+      </div>
+      <div class="blog-list" id="blogList">
+        <p class="blog-empty">No posts yet — <a href="https://thekingofthat.substack.com" target="_blank">subscribe to
+            get notified</a> when the first one drops.</p>
+      </div>
+      <div class="substack-sub reveal">
+        <div class="substack-sub-text">
+          <strong>Stay in the loop</strong>
+          <p>New posts on editing, creativity &amp; behind-the-scenes — straight to your inbox.</p>
+        </div>
+        <a href="https://thekingofthat.substack.com" target="_blank" class="btn-a" id="substack-cta">Subscribe on
+          Substack →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <div class="inner">
+      <div class="reveal">
+        <p class="slabel">My Arsenal</p>
+        <h2 class="stitle">My Setup</h2>
+      </div>
+
+      <div class="setup-grid">
+        <div class="setup-col reveal d1">
+          <h3 class="setup-sub">Software</h3>
+          <div class="setup-list">
+            <div class="setup-card">
+              <div class="sw-icon pr">
+                <img src="prpro.png" alt="Premiere Pro Logo"
+                  style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <span class="sw-text">Adobe Premiere Pro</span>
+            </div>
+            <div class="setup-card">
+              <div class="sw-icon ae">
+                <img src="after%20effects.png" alt="After Effects Logo"
+                  style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <span class="sw-text">After Effects</span>
+            </div>
+            <div class="setup-card">
+              <div class="sw-icon dr">
+                <img src="davinci.png" alt="DaVinci Resolve Logo"
+                  style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <span class="sw-text">DaVinci Resolve</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="setup-col reveal d2">
+          <h3 class="setup-sub">Hardware</h3>
+          <div class="setup-list">
+            <div class="setup-card">
+              <div class="hw-icon" style="border:none;background:transparent;">
+                <img src="asus.jpeg" alt="Asus TUF FX507"
+                  style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <div>
+                <span class="sw-text" style="display:block;">Asus TUF FX507</span>
+                <span style="font-size:0.8rem;color:var(--muted);display:block;margin-top:2px;">RTX 4060, Intel i7
+                  12700H, 16GB DDR4</span>
+              </div>
+            </div>
+            <div class="setup-card">
+              <div class="hw-icon" style="border:none;background:transparent;">
+                <img src="monitor.png" alt="Samsung Odyssey G3"
+                  style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <span class="sw-text">Samsung Odyssey G3</span>
+            </div>
+            <div class="setup-card">
+              <div class="hw-icon" style="border:none;background:transparent;">
+                <img src="jbl.jpg" alt="JBL Tune 770 NC"
+                  style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
+              </div>
+              <span class="sw-text">JBL Tune 770 NC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="inner">
+      <p class="slabel reveal">Let's Build Something</p>
+      <h2 class="ct-title reveal d1">Got a project?<br><span class="out">Let's talk.</span></h2>
+      <p class="ct-sub reveal d2">Whether you need a cinematic edit, a scroll-stopping reel, or a branded series — reach
+        out and let's create something great.</p>
+      <div class="cl-wrap reveal d3">
+        <a href="mailto:connect.adityaarora@gmail.com" class="cl" id="link-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          connect.adityaarora@gmail.com
+        </a>
+        <a href="tel:+918287707572" class="cl" id="link-phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          +91 82877 07572
+        </a>
+        <a href="https://wa.me/918800432190" target="_blank" class="cl" id="link-whatsapp">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.558 0 11.893-5.335 11.896-11.893a11.83 11.83 0 00-3.481-8.417z" />
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="flogo">AA<span>.</span></span>
+    <p>© 2026 Aditya Arora · adityaarora.in</p>
+    <a href="#" class="back-top">
+      Back to top
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </a>
+  </footer>
+
+  <script>
+
+    // NAV
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 50));
+
+    // SCROLL REVEAL
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // BLOG — fetch Substack posts via RSS, render as editorial list
+    (function () {
+      const list = document.getElementById('blogList');
+      const FEED = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fthekingofthat.substack.com%2Ffeed&count=5';
+      fetch(FEED).then(r => r.json()).then(data => {
+        if (data.status === 'ok' && data.items && data.items.length) {
+          list.innerHTML = data.items.map(p => {
+            const date = new Date(p.pubDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+            const excerpt = (p.description || '').replace(/<[^>]*>/g, '').trim().substring(0, 160);
+            return `<a href="${p.link}" target="_blank" class="blog-item reveal">
+          <div class="bi-main">
+            <span class="bi-date">${date}</span>
+            <h3 class="bi-title">${p.title}</h3>
+            ${excerpt ? `<p class="bi-excerpt">${excerpt}</p>` : ''}
+          </div>
+          <span class="bi-arrow">→</span>
+        </a>`;
+          }).join('');
+          list.querySelectorAll('.blog-item').forEach(el => obs.observe(el));
+        }
+        // else: keep the default empty state shown in HTML
+      }).catch(() => {/* keep default empty state */ });
+    })();
+  </script>
+</body>
+
+</html>
