@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aditya Arora | Video Editor - adityaarora.in</title>
-  <meta name="description" content="Aditya Arora | TheKingOfThat. Creator | Editor | Videographer.">
+  <title>Aditya Arora | TheKingOfThat - adityaarora.in</title>
+  <meta name="description" content="Aditya Arora - TheKingOfThat. Creator | Editor | Videographer.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
@@ -1120,6 +1120,46 @@
       transition-delay: .6s
     }
 
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      position: relative;
+      z-index: 1000
+    }
+
+    .menu-toggle svg {
+      width: 100%;
+      height: 100%;
+      transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1)
+    }
+
+    .menu-toggle .line-t,
+    .menu-toggle .line-m,
+    .menu-toggle .line-b {
+      transition: .4s cubic-bezier(0.19, 1, 0.22, 1)
+    }
+
+    .nav-active .menu-toggle .line-t {
+      transform: translateY(6px) rotate(45deg);
+      transform-origin: center
+    }
+
+    .nav-active .menu-toggle .line-m {
+      opacity: 0;
+      transform: translateX(-10px)
+    }
+
+    .nav-active .menu-toggle .line-b {
+      transform: translateY(-6px) rotate(-45deg);
+      transform-origin: center
+    }
+
     /* RESPONSIVE */
     @media(max-width:768px) {
 
@@ -1128,8 +1168,35 @@
         padding: 16px 24px
       }
 
+      .menu-toggle {
+        display: block
+      }
+
       .links {
-        display: none
+        position: fixed;
+        inset: 0;
+        background: var(--bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
+        z-index: 999
+      }
+
+      .nav-active .links {
+        opacity: 1;
+        visibility: visible;
+        background: rgba(7, 0, 26, 0.98);
+        backdrop-filter: blur(15px)
+      }
+
+      .links li a {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -1px
       }
 
       #hero {
@@ -1200,6 +1267,14 @@
 
   <nav id="nav">
     <a href="#" class="logo">AA<span>.</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12" class="line-m" />
+        <line x1="3" y1="6" x2="21" y2="6" class="line-t" />
+        <line x1="3" y1="18" x2="21" y2="18" class="line-b" />
+      </svg>
+    </button>
     <ul class="links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Skills</a></li>
@@ -1611,7 +1686,20 @@
 
   <script>
 
-    // NAV
+    // MOBILE NAV
+    const toggle = document.getElementById('menuToggle');
+    const body = document.body;
+    const links = document.querySelectorAll('.links a');
+
+    toggle.addEventListener('click', () => {
+      body.classList.toggle('nav-active');
+    });
+
+    links.forEach(l => l.addEventListener('click', () => {
+      body.classList.remove('nav-active');
+    }));
+
+    // NAV SCROLL SCENE
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 50));
 
