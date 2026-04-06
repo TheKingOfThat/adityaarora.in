@@ -981,8 +981,12 @@
     }
 
     /* SOCIALS SECTION */
-    #socials {
+    #stats {
       background: var(--bg)
+    }
+
+    #stats .setup-list {
+      grid-template-columns: repeat(2, 1fr);
     }
 
     /* FOOTER */
@@ -1546,36 +1550,28 @@
         <h2 class="stitle">My Socials</h2>
       </div>
 
-      <div class="setup-grid">
-        <div class="setup-col reveal d1">
-          <div class="setup-list">
-            <a href="https://www.instagram.com/thekingofthat.aa" target="_blank" class="setup-card"
-              style="text-decoration:none;">
-              <div class="hw-icon" style="border:none;background:transparent;">
-                <img src="ig.png" alt="Instagram" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
-              </div>
-              <div>
-                <span class="sw-text" style="display:block;">10,000+ Views, 250+ Followers</span>
-                <span style="font-size:0.8rem;color:var(--muted);display:block;margin-top:2px;">On Instagram</span>
-              </div>
-            </a>
+      <div class="setup-list">
+        <a href="https://www.instagram.com/thekingofthat.aa" target="_blank" class="setup-card reveal d1"
+          style="text-decoration:none;">
+          <div class="hw-icon" style="border:none;background:transparent;">
+            <img src="ig.png" alt="Instagram" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
           </div>
-        </div>
+          <div>
+            <span class="sw-text" style="display:block;">10,000+ Views, 250+ Followers</span>
+            <span style="font-size:0.8rem;color:var(--muted);display:block;margin-top:2px;">On Instagram</span>
+          </div>
+        </a>
 
-        <div class="setup-col reveal d2">
-          <div class="setup-list">
-            <a href="https://www.youtube.com/@TheKingOfThat" target="_blank" class="setup-card"
-              style="text-decoration:none;">
-              <div class="hw-icon" style="border:none;background:transparent;">
-                <img src="yt.png" alt="YouTube" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
-              </div>
-              <div>
-                <span class="sw-text" style="display:block;">400+ Views, 20+ Subscribers</span>
-                <span style="font-size:0.8rem;color:var(--muted);display:block;margin-top:2px;">On Youtube</span>
-              </div>
-            </a>
+        <a href="https://www.youtube.com/@TheKingOfThat" target="_blank" class="setup-card reveal d2"
+          style="text-decoration:none;">
+          <div class="hw-icon" style="border:none;background:transparent;">
+            <img src="yt.png" alt="YouTube" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">
           </div>
-        </div>
+          <div>
+            <span class="sw-text" style="display:block;">400+ Views, 20+ Subscribers</span>
+            <span style="font-size:0.8rem;color:var(--muted);display:block;margin-top:2px;">On Youtube</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
